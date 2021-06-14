@@ -1,0 +1,11 @@
+{
+    "name": "新帖推送",
+    "brief": "使用PushPlus进行新帖推送。",
+    "version": "1.0",
+    "bbs_version": "4.0",
+    "installed": 1,
+    "enable": 1,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}
