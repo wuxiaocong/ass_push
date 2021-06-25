@@ -1,4 +1,4 @@
-function send_post($url, $post_data) {
+function send_post($url,$post_data){
  $postdata = http_build_query($post_data);
  $options = array(
    'http' => array(
@@ -10,16 +10,32 @@ function send_post($url, $post_data) {
  );
  $context = stream_context_create($options);
  $result = file_get_contents($url, false, $context);
- return $result;
-};
+ //return $result;
+}
 $content = preg_replace("/\[ttreply].*.\[\/ttreply]/", "<p><strong>此处为回复后可见内容</strong></p>", $message);
-$data = array(
-    'token' => setting_get('ass_token'),
+$data_pp = array(
+    'token' => setting_get('ass_pp_token'),
     'title' => $subject,
     'content' => '<h1>'.$subject.'</h1><p>作者：'.thread_read_cache($tid)['user']['username'].'</p>'.$content.'<p>帖子地址：<a href="'.setting_get('ass_siteurl').'thread-'.$tid.'.htm">'.setting_get('ass_siteurl').'thread-'.$tid.'.htm</a></p>',
     'template' => 'html',
-    'topic' => setting_get('ass_group')
+    'topic' => setting_get('ass_pp_group')
 );
-if(!empty($data['token'] && $data['topic'])){
-send_post('http://pushplus.hxtrip.com/send',$data);
+if(setting_get('ass_op_pp') == 1){
+send_post('http://pushplus.hxtrip.com/send',$data_pp);
+}
+if(setting_get('ass_op_bd') == 1){
+  $urls = array(
+    setting_get('ass_siteurl').'thread-'.$tid.'.htm',
+);
+$api = 'http://data.zz.baidu.com/urls?site='.substr(setting_get('ass_siteurl'), 0, -1).'&token='.setting_get('ass_bd_token');
+$ch = curl_init();
+$options =  array(
+    CURLOPT_URL => $api,
+    CURLOPT_POST => true,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POSTFIELDS => implode(",", $urls),
+    CURLOPT_HTTPHEADER => array('Content-Type: text/plain'),
+);
+curl_setopt_array($ch, $options);
+$result = curl_exec($ch);
 }
