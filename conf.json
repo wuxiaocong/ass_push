@@ -1,7 +1,7 @@
 {
     "name": "新帖推送",
     "brief": "多种途径进行新帖推送。",
-    "version": "1.2",
+    "version": "1.3",
     "bbs_version": "4.0",
     "installed": 1,
     "enable": 1,

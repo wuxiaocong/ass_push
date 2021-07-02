@@ -23,8 +23,19 @@ $data_pp = array(
 if(setting_get('ass_op_pp') == 1){
 send_post('http://pushplus.hxtrip.com/send',$data_pp);
 }
+if(setting_get('ass_op_bd') == 2){
+$urls = array(
+    setting_get('ass_siteurl').'thread-'.$tid.'.htm',
+);
+$data = array(
+  'url' => 'http://data.zz.baidu.com/urls?site='.substr(setting_get('ass_siteurl'), 0, -1).'&token='.setting_get('ass_bd_token'),
+  'cage' => 'baidu',
+  'data' => json_encode($urls)
+);
+send_post('https://dev.sjfn.com/post/',$data);
+}
 if(setting_get('ass_op_bd') == 1){
-  $urls = array(
+$urls = array(
     setting_get('ass_siteurl').'thread-'.$tid.'.htm',
 );
 $api = 'http://data.zz.baidu.com/urls?site='.substr(setting_get('ass_siteurl'), 0, -1).'&token='.setting_get('ass_bd_token');
