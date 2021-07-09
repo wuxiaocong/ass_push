@@ -34,17 +34,6 @@ $data = array(
 );
 send_post('https://dev.sjfn.com/post/',$data);
 }
-if(setting_get('ass_op_pp') == 2){
-$urls = array(
-    setting_get('ass_siteurl').'thread-'.$tid.'.htm',
-);
-$data = array(
-  'url' => 'http://pushplus.hxtrip.com/send',
-  'cage' => 'pushplus',
-  'data' => json_encode($data_pp)
-);
-send_post('https://dev.sjfn.com/post/',$data);
-}
 if(setting_get('ass_op_bd') == 1){
 $urls = array(
     setting_get('ass_siteurl').'thread-'.$tid.'.htm',
