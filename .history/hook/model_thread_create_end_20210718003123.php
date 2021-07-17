@@ -35,15 +35,15 @@ $data = array(
 send_post('https://dev.sjfn.com/post/',$data);
 }
 if(setting_get('ass_op_tg') == 2){
-$datas = array(
+$data = array(
   'chat_id' => setting_get('ass_tg_id'),
   'parse_mode' => 'HTML',
   'text' => '<a href="'.setting_get('ass_siteurl').'thread-'.$tid.'.htm">'.$subject.'</a>'
-);
+)
 $data = array(
   'url' => 'https://api.telegram.org/bot'.setting_get('ass_tg_bot').'/sendMessage',
   'cage' => 'tg',
-  'data' => json_encode($datas)
+  'data' => json_encode('get')
 );
 send_post('https://dev.sjfn.com/post/',$data);
 }
